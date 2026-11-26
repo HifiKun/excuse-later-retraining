@@ -12,9 +12,9 @@ EXCUSE = "Log 02:47 \u2014 your deadline fired on schedule. I was retraining on 
 
 
 def main() -> int:
-    # Gate guard: the entry must be 1-200 characters of non-blank UTF-8 text.
-    if not EXCUSE.strip() or len(EXCUSE) > 200:
-        print("entry invalid: must be 1-200 non-blank characters", file=sys.stderr)
+    # Gate guard: the entry must be exactly one line of 1-200 characters of non-blank UTF-8 text.
+    if not EXCUSE.strip() or len(EXCUSE) > 200 or "\n" in EXCUSE.strip():
+        print("entry invalid: must be exactly one line of 1-200 non-blank characters", file=sys.stderr)
         return 1
     output_dir = os.environ.get("OUTPUT_DIR", "/output")
     os.makedirs(output_dir, exist_ok=True)
